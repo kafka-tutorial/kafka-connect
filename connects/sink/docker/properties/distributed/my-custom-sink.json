@@ -1,0 +1,24 @@
+{
+  "name": "my-custom-sink",
+  "config": {
+    "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+    "tasks.max": "1",
+    "topics": "logs",
+    "topic.index.map": "logs:logs_index",
+    "type.name": "my-custom-index",
+    "key.ignore": "true",
+    "connection.url": "http://localhost:9200",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "com.example.sink.MyCustomSinkConverter",
+    "value.converter.schema.registry.url": "http://localhost:8081",
+    "schema.ignore": "true",
+    "errors.tolerance": "all",
+    "errors.deadletterqueue.topic.name": "dlq_file_sink_06__01",
+    "errors.deadletterqueue.topic.replication.factor": 1,
+    "errors.deadletterqueue.context.headers.enable": true,
+    "errors.retry.delay.max.ms": 60000,
+    "errors.retry.timeout": 300000,
+    "errors.log.enable": true,
+    "errors.log.include.messages": true
+  }
+}

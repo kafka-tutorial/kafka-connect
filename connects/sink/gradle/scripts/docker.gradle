@@ -1,0 +1,22 @@
+apply plugin: "com.palantir.docker"
+
+println("??????????:- ${shadowJar.archiveName}")
+
+docker {
+    // Set the name of the docker image that we are creating
+    name "docker.repo1.example.com/kafka/sink/$jar.archiveName:$version"
+    tags 'latest' // deprecated, use 'tag'
+//    tag 'myRegistry', 'my.registry.com/username/my-app:version'
+    //Look for Dockerfile
+    dockerfile file('docker/Dockerfile')
+
+    //Include the jar file and all the content of docker/ folder in our Docker build.
+    files(shadowJar.archivePath, 'docker/')
+//    files tasks.distTar.outputs, 'file1.txt', 'file2.txt'
+    buildArgs([PROJECT_ARTIFACT_JAR_FILE: shadowJar.archiveName])
+    labels(['key': 'value'])
+//    pull true
+//    noCache true
+}
+
+docker.dependsOn shadowJar
