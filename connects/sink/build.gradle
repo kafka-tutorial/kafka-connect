@@ -10,12 +10,11 @@ buildscript {
 }
 
 plugins {
-    // Apply the java-library plugin to add support for Java Library
-    id 'com.github.johnrengelman.shadow' version '5.2.0'
     id 'java'
-
     // Apply the groovy plugin to also add support for Groovy (needed for Spock)
     id 'groovy'
+    id 'idea'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
 
     //Apply docker plugin
 //    id "com.palantir.docker" version "0.24.0"
@@ -33,13 +32,30 @@ apply {
 
 repositories {
     // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenLocal()
+//    jcenter()
+    mavenCentral()
+    maven {
+        url("https://packages.confluent.io/maven/")
+    }
 }
 
 dependencies {
+    // Kafka Dependencies -- STARTS --
+    //See:- https://mvnrepository.com/artifact/org.apache.kafka/kafka
+    compile group: 'org.apache.kafka', name: 'kafka_2.13', version: '2.4.0'
+    compile group: 'org.apache.kafka', name: 'connect-api', version: '2.4.0'
+    compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.4.0'
+    compile group: 'org.apache.kafka', name: 'connect-json', version: '2.4.0'
+
+    // Kafka Dependencies -- ENDS --
     // This dependency is exported to consumers, that is to say found on their compile classpath.
+//    compile group: 'commons-configuration', name: 'commons-configuration', version: '1.10'
+
+    compile group: 'org.apache.commons', name: 'commons-text', version: '1.8'
+
     compile 'org.apache.commons:commons-math3:3.6.1'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:28.1-jre'

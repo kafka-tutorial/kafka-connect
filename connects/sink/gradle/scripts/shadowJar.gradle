@@ -1,0 +1,11 @@
+shadowJar() {
+    dependsOn clean
+    dependencies {
+        // exclude dependencies provided in the kafka connect classpath
+        exclude dependency("org.apache.kafka:connect-api:$kafka_version")
+        exclude dependency("org.apache.kafka:kafka-clients:$kafka_version")
+        exclude dependency('net.jpountz.lz4:.*:.*')
+        exclude dependency('org.xerial.snappy:.*:.*')
+        exclude dependency('org.slf4j:.*:.*')
+    }
+}

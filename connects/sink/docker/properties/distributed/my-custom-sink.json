@@ -9,7 +9,7 @@
     "key.ignore": "true",
     "connection.url": "http://localhost:9200",
     "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-    "value.converter": "com.example.sink.MyCustomSinkConverter",
+    "value.converter": "com.example.sink.converter.UserConverter",
     "value.converter.schema.registry.url": "http://localhost:8081",
     "schema.ignore": "true",
     "errors.tolerance": "all",

@@ -1,7 +1,5 @@
 apply plugin: "com.palantir.docker"
 
-println("??????????:- ${shadowJar.archiveName}")
-
 docker {
     // Set the name of the docker image that we are creating
     name "docker.repo1.example.com/kafka/sink/$jar.archiveName:$version"
@@ -19,4 +17,4 @@ docker {
 //    noCache true
 }
 
-docker.dependsOn shadowJar
+dockerPrepare.dependsOn shadowJar
