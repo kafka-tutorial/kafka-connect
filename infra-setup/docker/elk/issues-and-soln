@@ -1,0 +1,45 @@
+****************
+****************
+elasticsearch      | ERROR: [3] bootstrap checks failed
+elasticsearch      | [1]: max file descriptors [4096] for elasticsearch process is too low, increase to at least [65535]
+elasticsearch      | [2]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+elasticsearch      | [3]: the default discovery settings are unsuitable for production use; at least one of [discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes] must be configured
+****************
+1) Set the ulimit:-
+Refer:-
+    1) https://www.elastic.co/guide/en/elasticsearch/reference/current/setting-system-settings.html#ulimit
+    2) https://www.elastic.co/guide/en/elasticsearch/reference/current/file-descriptors.html
+     Command:- ulimit -n 65535
+    -------------
+    For those who are using docker for running elastic search then you can set ulimit through your docker run command like below.
+
+    docker run --ulimit nofile=65536:65536 -p 9200:9200 --name elastic-search docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+
+
+2) Increase vm.max_map_count to 262144
+Soln:- See:- https://github.com/laradock/laradock/issues/1699
+       The log says [1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]. So I change the vm.max_map_count value to 262144 with this command in my local machine: sudo sysctl -w vm.max_map_count=262144.
+       The vm.max_map_count will be reseted to default value after you reboot your machine.
+       So set the vm.max_map_count using command:-
+       sudo sysctl -w vm.max_map_count=262144
+
+       Additional info:-
+        Note:- max_map_count: This file contains the maximum number of memory map areas a process may have. Memory map areas are used as a side-effect of calling malloc, directly by mmap and mprotect, and also when loading shared libraries.
+        While most applications need less than a thousand maps, certain programs, particularly malloc debuggers, may consume lots of them, e.g., up to one or two maps per allocation.
+        The default value is 65536.
+
+        Note 2:-
+        To increase the max_map_count parameter permanently, see:- https://docs.actian.com/vector/4.2/index.html#page/User/Increase_max_map_count_Kernel_Parameter_(Linux).htm
+        1.Add the following line to /etc/sysctl.conf:
+        vm.max_map_count=map_count
+        where map_count should be around 1 per 128 KB of system memory. For example:
+        vm.max_map_count=2097152
+        on a 256 GB system.
+        2.Reload the config as root:
+        sysctl -p
+        3.Check the new value:
+        cat /proc/sys/vm/max_map_count
+        4.Restart Vector.
+        Note:  The changed setting affects new processes only and should not adversely affect other processes or the OS. The memory is allocated only when a process needs the map areas.
+
+

@@ -2,7 +2,8 @@ apply plugin: "com.palantir.docker"
 
 docker {
     // Set the name of the docker image that we are creating
-    name "docker.repo1.example.com/kafka/sink/$jar.archiveName:$version"
+//    name "docker.repo1.example.com/kafka/sink/$jar.archiveName:$version"
+    name "docker.repo1.example.com/kafka/sink/custom-sink:$version"
     tags 'latest' // deprecated, use 'tag'
 //    tag 'myRegistry', 'my.registry.com/username/my-app:version'
     //Look for Dockerfile
