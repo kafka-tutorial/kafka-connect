@@ -1,3 +1,5 @@
+/*
+
 shadowJar() {
     dependsOn clean
     dependencies {
@@ -9,3 +11,4 @@ shadowJar() {
         exclude dependency('org.slf4j:.*:.*')
     }
 }
+*/

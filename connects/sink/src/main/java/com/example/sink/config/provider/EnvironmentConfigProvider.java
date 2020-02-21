@@ -93,6 +93,7 @@ public class EnvironmentConfigProvider implements ConfigProvider {
         public ConfigMap(Map<String, String> another) {
             super(another);
             substitutor = new StringSubstitutor(another);
+//            substitutor = new StringSubstitutor(another, DEFAULT_PREFIX, DEFAULT_SUFFIX, DEFAULT_ESCAPE, DEFAULT_VAR_DEFAULT);
         }
 
         @Override

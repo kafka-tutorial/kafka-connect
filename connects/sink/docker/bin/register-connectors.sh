@@ -8,5 +8,5 @@
 curl --request POST -sL \
      --url 'http://localhost:8083/connectors'\
      -H "Content-Type: application/json" \
-     -- data @/usr/local/share/kafka/properties/my-custom-sink.json \
+     -- data @/usr/local/share/kafka/properties/distributed/my-custom-sink.json \
      --output './logs/register-connectors-logs.log'
