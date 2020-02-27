@@ -36,8 +36,8 @@ function replaceValueInPropertyFile() {
 replaceValueInPropertyFile 'bootstrap.servers' "${BOOTSTRAP_SERVERS}" /usr/local/share/kafka/properties/standalone/connect-standalone.properties
 replaceValueInPropertyFile 'bootstrap.servers' "${BOOTSTRAP_SERVERS}" /usr/local/share/kafka/properties/distributed/connect-distributed.properties
 
-replaceValueInPropertyFile 'plugin.path' "${CONNECT_PLUGIN_PATH}" /usr/local/share/kafka/properties/standalone/connect-standalone.properties
-replaceValueInPropertyFile 'plugin.path' "${CONNECT_PLUGIN_PATH}" /usr/local/share/kafka/properties/distributed/connect-distributed.properties
+#replaceValueInPropertyFile 'plugin.path' "${CONNECT_PLUGIN_PATH}" /usr/local/share/kafka/properties/standalone/connect-standalone.properties
+#replaceValueInPropertyFile 'plugin.path' "${CONNECT_PLUGIN_PATH}" /usr/local/share/kafka/properties/distributed/connect-distributed.properties
 
 if [ "${RUN_MODE}" == "distributed" ]; then
     ## Please note that we created properties (/usr/local/share/kafka/properties/distributed/connect-distributed.properties) file in our Dockerfile
