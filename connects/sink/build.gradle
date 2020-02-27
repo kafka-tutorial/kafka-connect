@@ -48,7 +48,7 @@ dependencies {
     compile group: 'org.apache.kafka', name: 'kafka_2.13', version: '2.4.0'
     compile group: 'org.apache.kafka', name: 'connect-api', version: '2.4.0'
     compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.4.0'
-    compile group: 'org.apache.kafka', name: 'connect-json', version: '2.4.0'
+//    compile group: 'org.apache.kafka', name: 'connect-json', version: '2.4.0'
     //See:- https://packages.confluent.io/maven/io/confluent/kafka-connect-elasticsearch/
 //    compile("io.confluent:kafka-connect-elasticsearch:5.4.0")
     compile("io.confluent:kafka-connect-elasticsearch:5.2.1")
